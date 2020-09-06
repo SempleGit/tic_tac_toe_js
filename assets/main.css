@@ -1,0 +1,28 @@
+.wrapper {
+    display: grid;
+    justify-content: center;
+    background-color: rgba(12, 124, 12, 0.822);
+    padding: 20px;
+}
+
+.gameSquare {
+    display: grid;
+    justify-content: center;
+    align-content: center;
+    background-color: gray;
+    box-sizing: border-box;
+    font-size: 5rem;
+    font-style: normal;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.boardContainer{
+    display: grid;
+    grid: repeat(3, 3fr) / repeat(3, 3fr);
+    row-gap: 5px;
+    column-gap: 5px;
+    background-color: black;
+    width: 500px;
+    height: 500px;
+
+}
