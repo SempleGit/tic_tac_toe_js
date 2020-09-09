@@ -7,6 +7,7 @@
         const play = (space) => {
             board[space[0]][space[2]] = currentPlayer.getMarker();
             renderBoard();
+            moveCount++;
             if (!checkForWinner()) {
                 gameFlow();
             } 
@@ -60,26 +61,36 @@
         const winningCombos = horizontalWins.concat(verticalWins.concat(diagonalWins));
         
         for (let i = 0; i < winningCombos.length; i++) {
-            if (winningCombos[i].every(item => currentPlayer.getMarker() === item)) {
+            if (winningCombos[i].every(item => currentPlayer.getMarker() === item))  {
                 console.log("Winner!");
                 endGame();
                 return true;
             }
-        }
+        } 
         return false;       
     };
 
-    const endGame = () => {
-        console.log(currentPlayer.getName());
-        setTimeout(() => {alert(`${currentPlayer.getName()} Wins!`)}, 500);
+    const endGame = (tie = false) => {
+        if (!tie) {
+            console.log(currentPlayer.getName());
+            setTimeout(() => {alert(`${currentPlayer.getName()} Wins!`)}, 500);
+        } else {
+            setTimeout(() => {alert(`It's a tie!`)}, 500);
+        }
     }
 
     const gameFlow = () => {
-        currentPlayer = currentPlayer === player1 ? player2 : player1;
+        if (moveCount < 9) {
+            currentPlayer = currentPlayer === player1 ? player2 : player1;
+        } else {
+            currentPlayer = "";
+            endGame(true);
+        }
     }
 
     const player1 = player(prompt("Enter player 1: ") || "X", "X");
     const player2 = player(prompt("Enter player 2: ") || "O", "O");
+    let moveCount = 0;
     let currentPlayer;
     gameFlow();
 
